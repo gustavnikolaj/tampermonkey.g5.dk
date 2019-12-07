@@ -1,0 +1,2 @@
+build script: create index.html from metadata in comments
+deploy through github actions
