@@ -71,8 +71,8 @@ jobs:
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.PORT }}
+          port: ${{ secrets.SSH_PORT }}
           script: for x in `cd /www/tampermonkey/ && find -type f -not -name ".*" | sed 's?^./?https://tampermonkey.g5.dk/?'` ; do cache-purge $x ; done
