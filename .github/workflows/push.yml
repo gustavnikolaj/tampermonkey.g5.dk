@@ -1,5 +1,5 @@
 on: push
-name: test-lint
+name: CI/CD
 jobs:
   lint:
     name: lint
@@ -22,7 +22,6 @@ jobs:
 
   build:
     name: Build Website
-    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -48,7 +47,7 @@ jobs:
   deploy:
     name: Deploy Website
     if: github.ref == 'refs/heads/master'
-    needs: build
+    needs: [build, lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v1
@@ -64,5 +63,5 @@ jobs:
           PORT: ${{ secrets.SSH_PORT }}
           KEY: ${{ secrets.SSH_KEY }}
         with:
-          source: "dist/**/*"
+          source: "dist/*"
           target: "/www/tampermonkey"
