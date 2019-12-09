@@ -47,7 +47,7 @@ jobs:
 
   deploy:
     name: Deploy Website
-    if: github.ref == 'master'
+    if: github.ref == 'refs/heads/master'
     needs: build
     runs-on: ubuntu-latest
     steps:
