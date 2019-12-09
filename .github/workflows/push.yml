@@ -67,3 +67,12 @@ jobs:
           strip_components: 1
           rm: true
           target: "/www/tampermonkey"
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script: for x in `cd /www/tampermonkey/ && find -type f -not -name ".*" | sed 's?^./?https://tampermonkey.g5.dk/?'` ; do cache-purge $x ; done
