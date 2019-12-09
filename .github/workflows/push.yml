@@ -64,4 +64,6 @@ jobs:
           KEY: ${{ secrets.SSH_KEY }}
         with:
           source: "dist/*"
+          strip_components: 1
+          rm: true
           target: "/www/tampermonkey"
