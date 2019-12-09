@@ -4,6 +4,7 @@ const path = require("path");
 const SCRIPT_DIR = path.resolve(__dirname, "../src");
 const TEMPLATE_DIR = path.resolve(__dirname, "../templates");
 const OUTPUT_DIR = path.resolve(__dirname, "../dist");
+const STATIC_DIR = path.resolve(__dirname, "../static");
 
 function findScripts(pathToDir) {
   const files = fs.readdirSync(pathToDir);
@@ -72,7 +73,7 @@ function parseScript(raw) {
   };
 }
 
-function main(srcDir, templateDir, outputDir) {
+function main(srcDir, templateDir, staticDir, outputDir) {
   const scriptPaths = findScripts(srcDir);
   const scripts = scriptPaths.map(x => {
     const content = fs.readFileSync(x, "utf-8");
@@ -117,7 +118,20 @@ function main(srcDir, templateDir, outputDir) {
     `\n${entries.join("\n")}`
   );
 
-  console.log(indexContent);
+  fs.rmdirSync(outputDir, { recursive: true });
+  fs.mkdirSync(outputDir);
+  fs.writeFileSync(path.resolve(outputDir, "index.html"), indexContent);
+
+  for (const file of fs.readdirSync(staticDir)) {
+    fs.copyFileSync(
+      path.resolve(staticDir, file),
+      path.resolve(outputDir, file)
+    );
+  }
+
+  for (const file of fs.readdirSync(srcDir)) {
+    fs.copyFileSync(path.resolve(srcDir, file), path.resolve(outputDir, file));
+  }
 }
 
-main(SCRIPT_DIR, TEMPLATE_DIR, OUTPUT_DIR);
+main(SCRIPT_DIR, TEMPLATE_DIR, STATIC_DIR, OUTPUT_DIR);
