@@ -9,7 +9,7 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
-    GM_addStyle('body .Inbox-feedPane { flex-grow: 1; }');
-    GM_addStyle('body .Inbox-feedPane:only-child { flex-grow: 0; }');
+  "use strict";
+  GM_addStyle("body .Inbox-feedPane { flex-grow: 1; }");
+  GM_addStyle("body .Inbox-feedPane:only-child { flex-grow: 0; }");
 })();

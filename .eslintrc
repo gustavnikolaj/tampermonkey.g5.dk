@@ -11,5 +11,8 @@
     "mocha/no-exclusive-tests": "error",
     "mocha/no-nested-tests": "error",
     "mocha/no-identical-title": "error"
+  },
+  "globals": {
+    "GM_addStyle": "readonly"
   }
 }

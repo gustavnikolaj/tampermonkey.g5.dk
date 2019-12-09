@@ -9,7 +9,7 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
+  "use strict";
 
-    GM_addStyle('#bodyContent { max-width: 70em; }');
+  GM_addStyle("#bodyContent { max-width: 70em; }");
 })();
