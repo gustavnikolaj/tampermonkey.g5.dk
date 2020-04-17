@@ -16,9 +16,9 @@ jobs:
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
-      - run: yarn
+      - run: npm i
 
-      - run: yarn lint
+      - run: npm run lint
 
   build:
     name: Build Website
@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
 
-      - run: yarn
+      - run: npm install
 
       - run: node scripts/build
 
